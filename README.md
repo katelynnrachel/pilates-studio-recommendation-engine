@@ -1,6 +1,4 @@
-# Find Your Fit  
-### Review-Based Experience Matching Engine for Pilates Studios  
-**COMM 587 — Final Project**
+# Find Your Fit — Review-Driven Pilates Studio Recommendation Engine
 
 ---
 
@@ -8,6 +6,13 @@
 Find Your Fit is a review-based experience matching system designed to help users identify Pilates studios that best align with their personal preferences. Rather than relying on generic class types or objective difficulty labels, the system extracts **sentiment-derived experiential attributes** from review text—such as instructor quality, cleanliness, intensity, studio vibe, and perceived value—and combines them into a personalized **FitScore**.
 
 The project prioritizes interpretability, transparency, and user-centered design over black-box prediction, allowing users to understand *why* a studio is recommended rather than receiving opaque recommendations.
+
+---
+
+## Dashboard Preview
+
+![Find Your Fit Dashboard](assets/dashboard-preview.png)
+![Find Your Fit Dash](assets/dashboard-preview2.png)
 
 ---
 
@@ -27,12 +32,15 @@ This project addresses that gap by:
 ## Data Sources
 
 ### Yelp Reviews (Primary Data Source)
+Yelp review data was initially collected using the Yelp API to identify Pilates studios and retrieve review text. The retrieved data was processed and saved locally as structured CSV datasets to enable repeatable analysis without requiring repeated API calls.
+
+Review text was then used to extract sentiment-derived experiential attributes such as instructor quality, cleanliness, intensity, studio vibe, and perceived value.
 Yelp review text serves as the core data source for this project. Yelp data was used to:
 - identify Pilates studios,
 - analyze review text,
 - extract sentiment scores for experiential attributes.
 
-The Yelp Academic Dataset was used during development and exploration. Due to GitHub file size constraints, raw Yelp JSON files are not included in the repository. All processing logic that relies on this data is documented in the codebase.
+The Yelp Academic Dataset was used during development and exploration. Due to GitHub file size constraints, raw Yelp JSON files are not included in the repository. All processing logic that relies on this data is documented in the codebase. The Streamlit application reads from the processed dataset rather than making live API calls, ensuring fast performance and avoiding external API dependencies during runtime.
 
 ### Google Places API (One-Time Enrichment)
 The Google Places API was used to enrich studio profiles with:
@@ -41,6 +49,18 @@ The Google Places API was used to enrich studio profiles with:
 - `google_user_ratings_total`
 
 These values are stored in the final processed dataset and are **not fetched at runtime**. The Streamlit application reads the saved values to run.
+
+---
+
+## Technologies Used
+
+- Python
+- Streamlit
+- Pandas
+- NLP sentiment analysis (VADER / HuggingFace)
+- Yelp API
+- Google Places API
+- Mapbox / geospatial visualization
 
 ---
 
@@ -97,20 +117,6 @@ The application reads from the processed dataset and does not perform live API c
 
 ---
 
-## Repository Structure (Final Folder)
-Final/
-├── app.py
-├── src/
-│ ├── sentiment analysis scripts
-│ ├── feature extraction logic
-│ ├── FitScore calculation
-│ └── helper utilities
-├── data/
-│ └── processed/
-│ └── pilates_studio_profiles_final.csv
-├── presentation.pdf
-├── dashboard_screenshot.png
-└── README.md
 
 ## Design Decisions & Tradeoffs
 - Sentiment-derived experiential attributes were chosen over predefined class labels to better capture subjective experience.
