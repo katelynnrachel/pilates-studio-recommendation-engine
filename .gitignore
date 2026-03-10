@@ -1,0 +1,6 @@
+config.py
+src/config.py
+.env
+.DS_Store
+__pycache__/
+.Rhistory
